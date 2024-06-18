@@ -1,15 +1,12 @@
 // Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyB6W4hZ0NItBahd2ISkG3hnqXplphxR-zQ",
-  authDomain: "gymohacom.firebaseapp.com",
-  projectId: "gymohacom",
-  storageBucket: "gymohacom.appspot.com",
-  messagingSenderId: "413388682153",
-  appId: "1:413388682153:web:b8f8825f1e0b084afb8ab8",
-  measurementId: "G-KGHLMZBMH3"
+    apiKey: "AIzaSyB6W4hZ0NItBahd2ISkG3hnqXplphxR-zQ",
+    authDomain: "gymohacom.firebaseapp.com",
+    projectId: "gymohacom",
+    storageBucket: "gymohacom.appspot.com",
+    messagingSenderId: "413388682153",
+    appId: "1:413388682153:web:b8f8825f1e0b084afb8ab8"
 };
-
-
 
 // Initialize Firebase
 const app = firebase.initializeApp(firebaseConfig);
@@ -23,6 +20,8 @@ function login() {
         document.getElementById('loginPage').style.display = 'none';
         document.getElementById('chatPage').style.display = 'block';
         listenForMessages();
+    } else {
+        alert("Please enter a username");
     }
 }
 
