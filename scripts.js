@@ -15,6 +15,7 @@ const db = firebase.firestore();
 let username = "";
 
 function login() {
+    print("login")
     username = document.getElementById('username').value;
     if (username) {
         document.getElementById('loginPage').style.display = 'none';
