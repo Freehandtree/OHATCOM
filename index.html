@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Signal Chat</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="loginPage" class="page">
+        <h1>Login</h1>
+        <input type="text" id="username" placeholder="Enter your username">
+        <button onclick="login()">Login</button>
+    </div>
+
+    <div id="chatPage" class="page" style="display: none;">
+        <h1>Color Signal Chat</h1>
+        <div id="messages"></div>
+        <input type="text" id="messageInput" placeholder="Type a message">
+        <button onclick="sendMessage()">Send</button>
+        <div>
+            <button class="colorButton" style="background-color: red;" onclick="sendColor('red')"></button>
+            <button class="colorButton" style="background-color: green;" onclick="sendColor('green')"></button>
+            <button class="colorButton" style="background-color: blue;" onclick="sendColor('blue')"></button>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
