@@ -9,13 +9,12 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 let username = "";
 
 function login() {
-    print("login")
     username = document.getElementById('username').value;
     if (username) {
         document.getElementById('loginPage').style.display = 'none';
@@ -39,14 +38,6 @@ function sendMessage() {
     }
 }
 
-function sendColor(color) {
-    db.collection("messages").add({
-        username: username,
-        message: `${username} sent a color signal`,
-        color: color,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp()
-    });
-}
 
 function listenForMessages() {
     db.collection("messages")
