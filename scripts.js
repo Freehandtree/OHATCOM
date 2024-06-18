@@ -33,11 +33,24 @@ function sendMessage() {
             message: message,
             color: null,
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        }).then(() => {
+            document.getElementById('messageInput').value = '';
+        }).catch(error => {
+            console.error("Error adding message: ", error);
         });
-        document.getElementById('messageInput').value = '';
     }
 }
 
+function sendColor(color) {
+    db.collection("messages").add({
+        username: username,
+        message: `${username} sent a color signal`,
+        color: color,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    }).catch(error => {
+        console.error("Error sending color: ", error);
+    });
+}
 
 function listenForMessages() {
     db.collection("messages")
@@ -48,6 +61,8 @@ function listenForMessages() {
                 const data = doc.data();
                 addMessage(`${data.username}: ${data.message}`, data.color);
             });
+        }, error => {
+            console.error("Error listening for messages: ", error);
         });
 }
 
