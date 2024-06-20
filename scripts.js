@@ -1,70 +1,23 @@
-// Firebase configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyB6W4hZ0NItBahd2ISkG3hnqXplphxR-zQ",
-    authDomain: "gymohacom.firebaseapp.com",
-    projectId: "gymohacom",
-    storageBucket: "gymohacom.appspot.com",
-    messagingSenderId: "413388682153",
-    appId: "1:413388682153:web:b8f8825f1e0b084afb8ab8"
-};
-
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-
 let username = "";
 
 function login() {
-    console.log("Login")
     username = document.getElementById('username').value;
     if (username) {
         document.getElementById('loginPage').style.display = 'none';
         document.getElementById('chatPage').style.display = 'block';
-        listenForMessages();
-    } else {
-        alert("Please enter a username");
     }
 }
 
 function sendMessage() {
     const message = document.getElementById('messageInput').value;
     if (message) {
-        db.collection("messages").add({
-            username: username,
-            message: message,
-            color: null,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        }).then(() => {
-            document.getElementById('messageInput').value = '';
-        }).catch(error => {
-            console.error("Error adding message: ", error);
-        });
+        addMessage(`${username}: ${message}`);
+        document.getElementById('messageInput').value = '';
     }
 }
 
 function sendColor(color) {
-    db.collection("messages").add({
-        username: username,
-        message: `${username} sent a color signal`,
-        color: color,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp()
-    }).catch(error => {
-        console.error("Error sending color: ", error);
-    });
-}
-
-function listenForMessages() {
-    db.collection("messages")
-        .orderBy("timestamp")
-        .onSnapshot(snapshot => {
-            document.getElementById('messages').innerHTML = '';
-            snapshot.forEach(doc => {
-                const data = doc.data();
-                addMessage(`${data.username}: ${data.message}`, data.color);
-            });
-        }, error => {
-            console.error("Error listening for messages: ", error);
-        });
+    addMessage(`${username} sent a color signal`, color);
 }
 
 function addMessage(message, color) {
